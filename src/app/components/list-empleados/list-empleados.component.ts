@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 
 
@@ -13,7 +14,7 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 export class ListEmpleadosComponent implements OnInit {
   page: number = 1;
   searchText: any;
-  empleados: any[] = [];
+  empleados: Empleado[] = [];
 
   constructor( private _empleadoService: EmpleadoService,
     private toastr: ToastrService) {
@@ -25,15 +26,12 @@ export class ListEmpleadosComponent implements OnInit {
   }
 
   getEmpleados(){
-    // Utilizamos el servicio, al ser un observable hay que suscribirse
-    // Cuando termina de hacer la suscripcion, imprimimos la información que tiene data
     this._empleadoService.getEmpleados().subscribe(data => {
       this.empleados = [];
-      // For Each para iterar entre la informacion que tiene data
+      // Para iterar la informacion
       data.forEach((element: any) => {
         // Añadimos los valores al array
         this.empleados.push({
-          // Creamos un objeto con todos los elementos de ese ID
           id: element.payload.doc.id,
           ...element.payload.doc.data()
         })

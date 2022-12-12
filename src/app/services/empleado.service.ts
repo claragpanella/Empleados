@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { Empleado } from '../models/empleado';
 
 @Injectable({
   providedIn: 'root'
 })
 
-// Para hacer las peticiones al BackEnd(FireBase)
+// Para hacer las peticiones a firebase
 export class EmpleadoService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  agregarEmpleado(empleado: any): Promise<any>{
+  agregarEmpleado(empleado: Empleado): Promise<any>{
     return this.firestore.collection('empleados').add(empleado);
   }
 
@@ -27,8 +28,8 @@ export class EmpleadoService {
   getEmpleado(id: string): Observable<any>{
     return this.firestore.collection('empleados').doc(id).snapshotChanges();
   }
-  actualizarEmpleado(id: string, data:any): Promise<any>{
-    return this.firestore.collection('empleados').doc(id).update(data);
+  actualizarEmpleado(id: string, empleado: Empleado): Promise<any>{
+    return this.firestore.collection('empleados').doc(id).update(empleado);
 
   }
 }
