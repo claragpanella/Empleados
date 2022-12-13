@@ -7,7 +7,7 @@ export class Empleado{
     fechaActualizacion: Date;
     
 
-    constructor(nombre: string, apellido: string, DNI: number, sueldo: number, fechaCreacion: Date, fechaActualizacion: Date){
+    constructor(nombre: string, apellido: string, DNI: number, sueldo: number){
         this.nombre = nombre;
         this.apellido = apellido;
         this.DNI = DNI;
