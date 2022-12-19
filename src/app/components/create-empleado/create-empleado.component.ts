@@ -22,9 +22,9 @@ export class CreateEmpleadoComponent implements OnInit {
     private toastr: ToastrService,
     private aRoute: ActivatedRoute) {
     this.createEmpleado = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      DNI: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      DNI: ['', [Validators.required, Validators.maxLength(8), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       sueldo: ['', Validators.required]
     })
     
